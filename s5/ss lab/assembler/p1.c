@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-char opcode[10], operand[10], label[10], ch, temp1[20], temp2[20], temp3[20];
+char opcode[10], operand[10], label[10], temp1[20], temp2[20], temp3[20];
 int locctr, start, len, stN = -1, otN = -1, i, j = 0, flag, size = 0, opd;
 FILE *inputFile, *opcodeFile, *symtabFile, *intermediateFile, *lengthFile;
 
@@ -31,20 +31,22 @@ void read_line() {
   fscanf(inputFile, "%s", temp1);
   if (getc(inputFile) != '\n') {
     fscanf(inputFile, "%s", temp2);
-    if (getc(inputFile) != '\n')
+    if (getc(inputFile) != '\n') {
       fscanf(inputFile, "%s", temp3);
+    }
   }
+
   if (strcmp(temp1, "") != 0 && strcmp(temp2, "") != 0 &&
       strcmp(temp3, "") != 0) {
     strcpy(label, temp1);
     strcpy(opcode, temp2);
     strcpy(operand, temp3);
-  } else if (strcmp(temp1, "") != 0 && strcmp(temp2, "") != 0 &&
-             strcmp(temp3, "") == 0) {
+  } else if (strcmp(temp1, "") == 0 && strcmp(temp2, "") != 0 &&
+             strcmp(temp3, "") != 0) {
     strcpy(label, "");
     strcpy(opcode, temp1);
     strcpy(operand, temp2);
-  } else if (strcmp(temp1, "") != 0 && strcmp(temp2, "") == 0 &&
+  } else if (strcmp(temp1, "") == 0 && strcmp(temp2, "") != 0 &&
              strcmp(temp3, "") == 0) {
     strcpy(label, "");
     strcpy(opcode, temp1);
@@ -76,7 +78,7 @@ int main(int argc, char const *argv[]) {
     if (strcmp(label, "") != 0) {
       for (i = 0; i <= stN; i++) {
         if (strcmp(ST[i].label, label) == 0) {
-          printf("!!Error!!Symbol already present");
+          printf("!!Error!!Symbol already present\n%s\n", ST[i].label);
           exit(0);
         }
       }

@@ -1,10 +1,10 @@
 EXAMPLE START   100
-        LDA     ALPHA
-        ADD     BETA
-        J       STORE
+     	LDA     ALPHA
+     	ADD     BETA
+     	J       STORE
 ALPHA   WORD    12
 BETA    WORD    7
 SAVA    RESW    10
 STORE   STA     SAVA
-        RSUB
+     	RSUB    
         END     EXAMPLE
